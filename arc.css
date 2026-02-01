@@ -1,24 +1,18 @@
-/* --- CONFIGURATION --- */
+/* CONFIGURATION */
 :root {
     --type-speed: 28ms; 
 }
 
-/* --- BASICS --- */
+/* BASICS */
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Prevent rubber-banding scrolling on iOS */
-    overscroll-behavior: none; 
 }
 
 .font-serif { font-family: 'Lora', serif; }
 .font-sans { font-family: 'Inter', sans-serif; }
 
-/* Hide Scrollbar but allow scrolling */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* --- STORY TEXT STYLING --- */
+/* STORY TEXT STYLING */
 .story-block {
     opacity: 0;
     transform: translateY(10px);
@@ -27,7 +21,7 @@ body {
 
 .story-text {
     font-family: 'Lora', serif;
-    font-size: 0.95rem; /* Slightly smaller for mobile reading */
+    font-size: 1rem; 
     line-height: 1.6;
     color: #cbd5e1; /* Slate 300 */
 }
@@ -39,7 +33,7 @@ body {
 /* Speaker: HIM */
 .speaker-him {
     border-left: 3px solid #0f766e; /* Teal 700 */
-    padding-left: 0.75rem;
+    padding-left: 1rem;
     color: #e2e8f0;
     background: linear-gradient(to right, rgba(15, 118, 110, 0.05), transparent);
     border-radius: 0 4px 4px 0;
@@ -55,27 +49,22 @@ body {
     margin-bottom: -0.25rem;
 }
 
-/* --- BUTTON STYLING --- */
+/* BUTTON STYLING */
 .choice-btn {
     width: 100%;
     text-align: left;
-    padding: 0.9rem 1rem; /* Better touch target sizing */
-    background: rgba(15, 23, 42, 0.85); /* Dark Slate */
-    border: 1px solid rgba(148, 163, 184, 0.15);
+    padding: 1.1rem 1.25rem; /* Large touch target */
+    background: rgba(15, 23, 42, 0.6); /* Dark Slate */
+    border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 8px;
     color: #94a3b8;
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 400;
     transition: all 0.2s ease;
     cursor: pointer;
-    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
-    /* Prevent text selection on mobile tap */
-    -webkit-user-select: none;
-    user-select: none;
-    /* Highlight removal on tap for mobile */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -89,20 +78,21 @@ body {
     cursor: not-allowed;
     transform: none;
     filter: grayscale(1);
+    border-color: transparent;
 }
 
-/* --- HORROR / ENDING EFFECTS --- */
+/* EFFECTS */
 
-/* The Bleeding Text Effect */
+/* Bleeding Text */
 .bleed-text {
-    color: #ef4444; /* Red 500 */
+    color: #ef4444; 
     text-shadow: 0 0 10px rgba(220, 38, 38, 0.6);
     font-weight: 600;
     letter-spacing: 0.5px;
     animation: pulse-red 2.5s infinite;
 }
 
-/* The Cold/Dying Text Effect */
+/* Cold Text */
 .cold-text {
     color: #94a3b8;
     opacity: 0.6;
@@ -110,7 +100,7 @@ body {
     animation: freeze 5s forwards;
 }
 
-/* --- ANIMATIONS --- */
+/* ANIMATIONS */
 @keyframes fadeInUp {
     to { opacity: 1; transform: translateY(0); }
 }
