@@ -1,0 +1,129 @@
+/* --- CONFIGURATION --- */
+:root {
+    --type-speed: 30ms; 
+}
+
+/* --- BASICS --- */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif { font-family: 'Lora', serif; }
+.font-sans { font-family: 'Inter', sans-serif; }
+
+/* Hide Scrollbar but allow scrolling */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* --- STORY TEXT STYLING --- */
+.story-block {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.8s forwards ease-out;
+}
+
+.story-text {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #cbd5e1; /* Slate 300 */
+}
+
+@media (min-width: 768px) {
+    .story-text { font-size: 1.1rem; line-height: 1.8; }
+}
+
+/* Speaker: HIM */
+.speaker-him {
+    border-left: 3px solid #0f766e; /* Teal 700 */
+    padding-left: 1rem;
+    color: #e2e8f0;
+    background: linear-gradient(to right, rgba(15, 118, 110, 0.05), transparent);
+    border-radius: 0 4px 4px 0;
+}
+
+/* Speaker: YOU */
+.speaker-you {
+    color: #64748b; /* Slate 500 */
+    font-size: 0.95rem;
+    font-style: italic;
+    text-align: right;
+    padding-right: 0.5rem;
+    margin-bottom: -0.5rem;
+}
+
+/* --- BUTTON STYLING --- */
+.choice-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    background: rgba(15, 23, 42, 0.7); /* Dark Slate */
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 6px;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+}
+
+.choice-btn:hover {
+    background: rgba(20, 184, 166, 0.05);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: #f0f9ff;
+    transform: translateY(-1px);
+}
+
+.choice-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    filter: grayscale(1);
+}
+
+/* --- HORROR / ENDING EFFECTS --- */
+
+/* The Bleeding Text Effect */
+.bleed-text {
+    color: #ef4444; /* Red 500 */
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.6);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: pulse-red 2.5s infinite;
+}
+
+/* The Cold/Dying Text Effect */
+.cold-text {
+    color: #94a3b8;
+    opacity: 0.6;
+    filter: blur(0.6px);
+    animation: freeze 5s forwards;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-slow {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.animate-fade-in-slow { animation: fade-in-slow 2s forwards ease-in-out; }
+
+@keyframes pulse-red {
+    0% { text-shadow: 0 0 10px rgba(220, 38, 38, 0.6); opacity: 0.9; }
+    50% { text-shadow: 0 0 20px rgba(220, 38, 38, 1); opacity: 1; }
+    100% { text-shadow: 0 0 10px rgba(220, 38, 38, 0.6); opacity: 0.9; }
+}
+
+@keyframes freeze {
+    0% { filter: blur(0px); color: #cbd5e1; }
+    100% { filter: blur(1.5px); color: #475569; }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Funny Story</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="arc.css">
+</head>
+<body class="bg-slate-950 text-slate-300 h-screen w-screen overflow-hidden selection:bg-teal-900 selection:text-white">
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900 via-slate-950 to-black opacity-90"></div>
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+    </div>
+
+    <main class="relative z-10 w-full max-w-2xl mx-auto h-full flex flex-col p-6 md:p-8">
+        
+        <header class="flex-none py-4 border-b border-slate-800/50 mb-2 flex justify-between items-end opacity-0 animate-fade-in-slow">
+            <h1 class="text-xl font-serif text-slate-200 tracking-wide">A Funny Story</h1>
+            <div id="chapter-indicator" class="text-[10px] md:text-xs font-sans tracking-[0.2em] text-teal-700 uppercase">PROLOGUE</div>
+        </header>
+
+        <div id="scroll-container" class="flex-1 overflow-y-auto no-scrollbar scroll-smooth pr-1 md:pr-4">
+            <div id="story-log" class="flex flex-col gap-6 pb-32 pt-4">
+                </div>
+        </div>
+
+        <div class="flex-none relative pt-4 pb-2">
+            <div id="typing-indicator" class="absolute -top-6 left-1 text-slate-600 text-xs italic tracking-widest hidden animate-pulse">
+                He is typing...
+            </div>
+
+            <div id="choices" class="grid grid-cols-1 gap-3 transition-all duration-500">
+                <button id="start-btn" class="choice-btn text-center justify-center">Read the story</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="arc.js"></script>
+</body>
+</html>
