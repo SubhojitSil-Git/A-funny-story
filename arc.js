@@ -12,9 +12,16 @@ const state = {
 // DOM REFERENCES
 const storyLog = document.getElementById('story-log');
 const choiceArea = document.getElementById('choices');
-const scrollContainer = document.getElementById('scroll-container');
 const chapterIndicator = document.getElementById('chapter-indicator');
 const typingIndicator = document.getElementById('typing-indicator');
+
+// HELPER: Auto Scroll Window
+function scrollToBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
+}
 
 // ENGINE FUNCTIONS
 
@@ -34,10 +41,10 @@ function typeText(element, text, callback) {
                 index++;
             }
             
-            // Auto scroll
-            scrollContainer.scrollTop = scrollContainer.scrollHeight;
+            // Continuous smooth scroll while typing
+            scrollToBottom();
             
-            // Randomize speed slightly for realism
+            // Randomize speed slightly
             const randomSpeed = TYPE_SPEED + (Math.random() * 10 - 5);
             setTimeout(nextChar, randomSpeed);
         } else {
@@ -57,8 +64,7 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
         
         storyLog.appendChild(div);
         
-        // Auto scroll immediately when block is added
-        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+        scrollToBottom(); // Ensure new block is visible
         
         if(isDialogue) typingIndicator.classList.remove('hidden');
 
@@ -78,6 +84,9 @@ function clearChoices() {
 
 function showChoices(choices) {
     clearChoices();
+    // Scroll to bottom so choices are visible
+    setTimeout(scrollToBottom, 100);
+
     choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.className = "choice-btn";
@@ -403,6 +412,7 @@ const scenes = {
             endDiv.innerHTML = "FIN";
             endDiv.className = "text-center text-slate-600 tracking-[0.5em] mt-8 font-serif opacity-50";
             choiceArea.appendChild(endDiv);
+            scrollToBottom();
         }
     }
 };
