@@ -404,7 +404,6 @@ const scenes = {
             await renderBlock("You were actually choosing how to survive knowing you couldn’t.");
             await renderBlock("Some people do not need more love. They need a reason that does not depend on anyone else.");
             await renderBlock("And you were never allowed to be that reason.");
-            await renderBlock("No replay button. No comfort screen. Just the weight.");
             
             // End State
             clearChoices();
@@ -440,3 +439,4 @@ async function handleScene(sceneKey) {
 document.getElementById('start-btn').onclick = () => {
     handleScene('start');
 };
+
