@@ -57,6 +57,9 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
         
         storyLog.appendChild(div);
         
+        // Auto scroll immediately when block is added
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+        
         if(isDialogue) typingIndicator.classList.remove('hidden');
 
         setTimeout(() => {
