@@ -9,33 +9,73 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="arc.css">
 </head>
-<body class="bg-slate-950 text-slate-300 min-h-screen w-full selection:bg-teal-900 selection:text-white">
+<body class="bg-black text-slate-400 h-screen w-screen overflow-hidden selection:bg-teal-900/50 selection:text-teal-100">
 
+    <!-- Animated Background -->
     <div class="fixed inset-0 pointer-events-none z-0">
-        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900 via-slate-950 to-black opacity-90"></div>
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+        <!-- Gradient Layers -->
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-black to-slate-950 opacity-80"></div>
+        
+        <!-- Subtle animated gradient orbs -->
+        <div class="absolute top-0 -left-40 w-96 h-96 bg-teal-950/20 rounded-full blur-3xl animate-float-slow"></div>
+        <div class="absolute bottom-0 -right-40 w-96 h-96 bg-slate-900/20 rounded-full blur-3xl animate-float-slower"></div>
+        
+        <!-- Noise texture -->
+        <div class="absolute inset-0 opacity-[0.02]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 /%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        
+        <!-- Subtle scanlines -->
+        <div class="absolute inset-0 opacity-[0.02] pointer-events-none" style="background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);"></div>
     </div>
 
-    <main class="relative z-10 w-full max-w-2xl mx-auto flex flex-col min-h-screen px-6 md:px-8 pb-24">
+    <!-- Vignette Effect -->
+    <div class="fixed inset-0 pointer-events-none z-40 bg-radial-vignette"></div>
+
+    <main class="relative z-10 w-full max-w-3xl mx-auto h-full flex flex-col p-4 md:p-8 lg:p-12">
         
-        <header class="sticky top-0 pt-6 pb-4 mb-4 flex justify-between items-end border-b border-slate-800/50 bg-slate-950/90 backdrop-blur-md z-50 animate-fade-in-slow">
-            <h1 class="text-lg md:text-xl font-serif text-slate-200 tracking-wide">A Funny Story</h1>
-            <div id="chapter-indicator" class="text-[10px] md:text-xs font-sans tracking-[0.2em] text-teal-700 uppercase">PROLOGUE</div>
+        <!-- Header -->
+        <header class="flex-none py-6 md:py-8 border-b border-slate-800/30 mb-2 flex justify-between items-end opacity-0 animate-fade-in-slow relative">
+            <div class="relative">
+                <h1 class="text-2xl md:text-3xl font-serif text-slate-300 tracking-wide mb-1 relative">
+                    A Funny Story
+                    <span class="absolute -bottom-1 left-0 w-12 h-px bg-gradient-to-r from-teal-700/50 to-transparent"></span>
+                </h1>
+                <p class="text-[10px] md:text-xs text-slate-600 font-sans tracking-wider uppercase mt-2">An Interactive Experience</p>
+            </div>
+            <div id="chapter-indicator" class="text-[10px] md:text-xs font-sans tracking-[0.25em] text-teal-600 uppercase px-3 py-1 border border-teal-900/30 rounded-sm bg-teal-950/10 backdrop-blur-sm">
+                PROLOGUE
+            </div>
         </header>
 
-        <div id="story-log" class="flex flex-col gap-6 flex-1">
+        <!-- Story Container -->
+        <div id="scroll-container" class="flex-1 overflow-y-auto no-scrollbar scroll-smooth pr-2 md:pr-6 mask-fade-bottom">
+            <div id="story-log" class="flex flex-col gap-6 md:gap-8 pb-32 pt-4">
+                <!-- Story blocks will be added here -->
             </div>
-
-        <div id="typing-indicator" class="h-6 mt-4 text-slate-600 text-[10px] md:text-xs italic tracking-widest hidden animate-pulse">
-            He is typing...
         </div>
 
-        <div id="choices" class="grid grid-cols-1 gap-3 mt-8 pt-4 pb-12 transition-all duration-500">
-            <button id="start-btn" class="choice-btn text-center justify-center">Read the story</button>
+        <!-- Interaction Area -->
+        <div class="flex-none relative pt-6 pb-2">
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="absolute -top-8 left-2 text-slate-700 text-xs italic tracking-wide hidden flex items-center gap-2">
+                <span class="flex gap-1">
+                    <span class="w-1.5 h-1.5 bg-teal-700/50 rounded-full animate-pulse-dot" style="animation-delay: 0ms"></span>
+                    <span class="w-1.5 h-1.5 bg-teal-700/50 rounded-full animate-pulse-dot" style="animation-delay: 150ms"></span>
+                    <span class="w-1.5 h-1.5 bg-teal-700/50 rounded-full animate-pulse-dot" style="animation-delay: 300ms"></span>
+                </span>
+                <span>He is typing</span>
+            </div>
+
+            <!-- Choice Buttons -->
+            <div id="choices" class="grid grid-cols-1 gap-3 transition-all duration-500">
+                <button id="start-btn" class="choice-btn text-center justify-center group">
+                    <span class="relative z-10">Read the story</span>
+                    <span class="absolute inset-0 bg-gradient-to-r from-teal-900/0 via-teal-900/10 to-teal-900/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></span>
+                </button>
+            </div>
         </div>
 
     </main>
