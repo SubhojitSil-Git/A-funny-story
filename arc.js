@@ -424,6 +424,19 @@ async function handleScene(sceneKey) {
 }
 
 // Start Button Listener
-document.getElementById('start-btn').onclick = () => {
-    handleScene('start');
-};
+
+// Start Button Listener - Wait for DOM to be ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStartButton);
+} else {
+    initStartButton();
+}
+
+function initStartButton() {
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+        startBtn.onclick = () => {
+            handleScene('start');
+        };
+    }
+}
