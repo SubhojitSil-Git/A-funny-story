@@ -64,7 +64,7 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
         
         storyLog.appendChild(div);
         
-        scrollToBottom(); // Ensure new block is visible
+        scrollToBottom(); 
         
         if(isDialogue) typingIndicator.classList.remove('hidden');
 
@@ -77,7 +77,7 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
     });
 }
 
-// 3. Choice System
+// 3. Choice system 
 function clearChoices() {
     choiceArea.innerHTML = '';
 }
@@ -141,7 +141,7 @@ const scenes = {
     layer1_sit: {
         run: async () => {
             await renderBlock("He shifts slightly. He isn't used to silence that doesn't demand an answer.");
-            await renderBlock("“You don't have to stay,” he mumbles.", true);
+            await renderBlock("“You don't have to stay," he mumbles.", true);
             handleScene('layer2_transition');
         }
     },
@@ -149,7 +149,7 @@ const scenes = {
         run: async () => {
             await renderBlock("He lets out a breath that sounds like a laugh.");
             await renderBlock("“It is,” he says. “It's a full time job.”", true);
-            handleScene('layer2_transition');
+            handleScene('layer2_transition');            
         }
     },
 
@@ -437,6 +437,8 @@ async function handleScene(sceneKey) {
 
 // Start Button Listener
 document.getElementById('start-btn').onclick = () => {
+    
     handleScene('start');
 };
+
 
