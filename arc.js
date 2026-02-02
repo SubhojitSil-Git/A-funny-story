@@ -12,16 +12,9 @@ const state = {
 // DOM REFERENCES
 const storyLog = document.getElementById('story-log');
 const choiceArea = document.getElementById('choices');
+const scrollContainer = document.getElementById('scroll-container');
 const chapterIndicator = document.getElementById('chapter-indicator');
 const typingIndicator = document.getElementById('typing-indicator');
-
-// HELPER: Auto Scroll Window
-function scrollToBottom() {
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-    });
-}
 
 // ENGINE FUNCTIONS
 
@@ -41,10 +34,10 @@ function typeText(element, text, callback) {
                 index++;
             }
             
-            // Continuous smooth scroll while typing
-            scrollToBottom();
+            // Auto scroll
+            scrollContainer.scrollTop = scrollContainer.scrollHeight;
             
-            // Randomize speed slightly
+            // Randomize speed slightly for realism
             const randomSpeed = TYPE_SPEED + (Math.random() * 10 - 5);
             setTimeout(nextChar, randomSpeed);
         } else {
@@ -64,8 +57,6 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
         
         storyLog.appendChild(div);
         
-        scrollToBottom(); 
-        
         if(isDialogue) typingIndicator.classList.remove('hidden');
 
         setTimeout(() => {
@@ -77,16 +68,13 @@ async function renderBlock(text, isDialogue = false, isYou = false) {
     });
 }
 
-// 3. Choice system 
+// 3. Choice System
 function clearChoices() {
     choiceArea.innerHTML = '';
 }
 
 function showChoices(choices) {
     clearChoices();
-    // Scroll to bottom so choices are visible
-    setTimeout(scrollToBottom, 100);
-
     choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.className = "choice-btn";
@@ -141,7 +129,7 @@ const scenes = {
     layer1_sit: {
         run: async () => {
             await renderBlock("He shifts slightly. He isn't used to silence that doesn't demand an answer.");
-            await renderBlock("“You don't have to stay," he mumbles.", true);
+            await renderBlock("“You don't have to stay,” he mumbles.", true);
             handleScene('layer2_transition');
         }
     },
@@ -149,7 +137,7 @@ const scenes = {
         run: async () => {
             await renderBlock("He lets out a breath that sounds like a laugh.");
             await renderBlock("“It is,” he says. “It's a full time job.”", true);
-            handleScene('layer2_transition');            
+            handleScene('layer2_transition');
         }
     },
 
@@ -404,6 +392,7 @@ const scenes = {
             await renderBlock("You were actually choosing how to survive knowing you couldn’t.");
             await renderBlock("Some people do not need more love. They need a reason that does not depend on anyone else.");
             await renderBlock("And you were never allowed to be that reason.");
+            await renderBlock("No replay button. No comfort screen. Just the weight.");
             
             // End State
             clearChoices();
@@ -411,7 +400,6 @@ const scenes = {
             endDiv.innerHTML = "FIN";
             endDiv.className = "text-center text-slate-600 tracking-[0.5em] mt-8 font-serif opacity-50";
             choiceArea.appendChild(endDiv);
-            scrollToBottom();
         }
     }
 };
@@ -437,8 +425,5 @@ async function handleScene(sceneKey) {
 
 // Start Button Listener
 document.getElementById('start-btn').onclick = () => {
-    
     handleScene('start');
 };
-
-
